@@ -6,7 +6,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello World'
+    #return 'Hello World'
+    return render_template('dashboard.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -16,10 +17,10 @@ def signup():
         password = request.form['password']
         code = createUser(email, password, name)
         if(code['code'] == 'USER_CREATED'):
-            return render_template('register.html', message="User Created Successfully.")
+            return render_template('signup.html', message="User Created Successfully.")
         elif(code['code'] == 'EXISTING_USER'):
-            return render_template('register.html', message="Existing User Found.")
-    return render_template('register.html')
+            return render_template('signup.html', message="Existing User Found.")
+    return render_template('signup.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

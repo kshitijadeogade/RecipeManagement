@@ -54,6 +54,8 @@ def deleteRecipe(id):
     delete = recipes_collection.delete_one({'_id': ObjectId(id)})
     return {'code': "RECIPE_DELETED"}
 
-print(deleteRecipe("67dabeb83948e9820e62dd75"))
+#print(deleteRecipe("67dabeb83948e9820e62dd75"))
 #print(editRecipe("67dae766c4d788f599650d70", "Palak Paneer Lahsuni",'pic2',["Palak", "Paneer"], ["Boil the palak","Fry the paneer", "Grind the palak","Give the final tadka","Put paneer pieces in tadka"],["Dont deep fry paneer"]))
 #print(editRecipe('67dabeb83948e9820e62dd75','pic2',"Palak Paneer","Palak", ["Boil the palak","Fry the paneer", "Grind the palak","Give the final tadka","Put paneer pieces in tadka"],["Dont deep fry paneer"]))
+
+#print(createUser('deogadekshitija@gmail.com', 'password', 'name'))
