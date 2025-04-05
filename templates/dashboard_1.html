@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 20px 15px;
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .dashboard-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .project-cards {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .project-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: calc(33% - 20px);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+        }
+
+        .project-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .project-status {
+            color: #888;
+        }
+
+        .project-progress {
+            margin-top: 10px;
+            height: 8px;
+            background-color: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #4CAF50;
+        }
+
+        .alert {
+            padding: 10px;
+            background-color: #f9c74f;
+            color: #333;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .alert a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        @media (max-width: 768px) {
+            .project-card {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                width: 100%;
+                height: auto;
+                padding: 10px;
+            }
+            .content {
+                margin-left: 0;
+            }
+            .project-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Dashboard</h1>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Recipes List</a>
+    <a href="#">Team Collaboration</a>
+    <a href="#">Settings</a>
+    <a href="#">Logout</a>
+</nav>
+
+<div class="content">
+    {% block content %}
+    <!-- Notifications Section -->
+    <div class="alert">
+        <strong>New Update:</strong> Your "Recipe" has reached 80% completion! <a href="#">View details</a>.
+    </div>
+
+    <!-- Dashboard Form Section -->
+    <div class="dashboard-form">
+        <h2>Welcome to Your Dashboard</h2>
+        <form method="post" action="{{ url_for('welcome') }}">
+            <input type="text" class="input-field" name="Recipe_name" placeholder="Enter Recipe name">
+            <input type="text" class="input-field" name="Recipe_description" placeholder="Enter Recipe description">
+            <button type="submit" class="button">Submit</button>
+        </form>
+    </div>
+
+    <!-- Project Cards -->
+    <h2>Recent Recipe Browsing</h2>
+    <div class="project-cards">
+        <div class="project-card">
+            <div class="project-title">Recipe: 1</div>
+            <div class="project-status">In Progress</div>
+            <div class="project-progress">
+                <div class="progress-bar" style="width: 50%"></div>
+            </div>
+        </div>
+        <div class="project-card">
+            <div class="project-title">Recipe: 2</div>
+            <div class="project-status">Completed</div>
+            <div class="project-progress">
+                <div class="progress-bar" style="width: 100%"></div>
+            </div>
+        </div>
+        <div class="project-card">
+            <div class="project-title">Recipe: 3</div>
+            <div class="project-status">In Progress</div>
+            <div class="project-progress">
+                <div class="progress-bar" style="width: 30%"></div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</div>
+
+</body>
+</html>
