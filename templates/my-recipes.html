@@ -1,0 +1,115 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Recipes: User's Recipe Collection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            position: relative;
+            text-align: center;
+            color: white;
+            background-color: #ff6f61;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-family: 'Pacifico', cursive;
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .recipe-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .recipe-card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .recipe-card h3 {
+            margin: 15px 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .recipe-card .status {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #ff6f61;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 10px;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>My Recipes</h1>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Add Recipe</a>
+    <a href="#">Profile</a>
+</nav>
+
+<div class="recipe-grid">
+    <!-- Example Recipe Card -->
+    <div class="recipe-card">
+        <img src="https://www.vikhrolicucina.com/uploads/stories/1582355956_Rajmachawal.jpg" alt="Recipe Image">
+        <h3>Butter Chicken</h3>
+        <div class="status">Status: Completed</div>
+    </div>
+
+    <div class="recipe-card">
+        <img src="https://www.vikhrolicucina.com/uploads/stories/1582355956_Rajmachawal.jpg" alt="Recipe Image">
+        <h3>Chocolate Cake</h3>
+        <div class="status">Status: In Progress</div>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}

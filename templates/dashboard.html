@@ -1,8 +1,66 @@
 {% block content %}
-  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasteTrail: Recipe Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <!-- Replace with your logo image or keep as text -->
+                <h1>TasteTrail</h1>
+            </div>
+            <nav>
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Login</a>
+                <a href="#" class="nav-link">Signup</a>
+            </nav>
+        </div>
+    </header>
 
-  <form method="post" action="{{ url_for('hello_world') }}">
-    
-    <button type="submit">Hello</button>
-  </form>
+    <!-- Main Content -->
+    <main class="content">
+        <section class="recipe-section">
+            <h2>Indian Recipes</h2>
+            <div class="project-cards">
+                <div class="project-card">
+                    <img src="https://www.vikhrolicucina.com/uploads/stories/1582355956_Rajmachawal.jpg" alt="Rajma Chawal">
+                    <div class="project-title">Rajma Chawal</div>
+                    <div class="project-status">In Progress</div>
+                    <div class="project-progress"><div class="progress-bar" style="width: 60%;"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="recipe-section">
+            <h2>Italian Recipes</h2>
+            <div class="project-cards">
+                <div class="project-card">
+                    <img src="https://www.allrecipes.com/thmb/Vg2cRidr2zcYhWGvPD8M18xM_WY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/11973-spaghetti-carbonara-ii-DDMFS-4x3-6edea51e421e4457ac0c3269f3be5157.jpg" alt="Spaghetti Carbonara">
+                    <div class="project-title">Spaghetti Carbonara</div>
+                    <div class="project-status">Completed</div>
+                    <div class="project-progress"><div class="progress-bar" style="width: 100%;"></div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2025 TasteTrail. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
 {% endblock %}

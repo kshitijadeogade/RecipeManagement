@@ -4,7 +4,7 @@ from db import createUser, loginUser
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/dashboard')
 def hello_world():
     #return 'Hello World'
     return render_template('dashboard.html')
@@ -36,15 +36,15 @@ def login():
 
 @app.route('/add-recipe')
 def add_recipe():
-    return 'Add recipe'
+    return render_template('add-recipe.html')
 
 @app.route('/edit-recipe')
 def edit_recipe():
-    return 'Edit recipe'
+    return render_template('edit-recipe.html')
 
 @app.route('/my-recipes')
 def my_recipes():
-    return 'My recipes'
+    return render_template('my-recipe.html')
 
 if __name__ == '__main__':
     app.run()

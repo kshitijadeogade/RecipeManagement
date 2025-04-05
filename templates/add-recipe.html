@@ -1,0 +1,98 @@
+{%block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            text-align: center;
+            background-color: #ff6f61;
+            color: white;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #e65a50;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Add a New Recipe</h1>
+</header>
+
+<div class="form-container">
+    <form action="#" method="POST">
+        <label for="recipe-name">Recipe Name</label>
+        <input type="text" id="recipe-name" name="recipe-name" required>
+
+        <label for="recipe-image">Recipe Image</label>
+        <input type="url" id="recipe-image" name="recipe-image" required>
+
+        <label for="recipe-ingredients">Ingredients</label>
+        <textarea id="recipe-ingredients" name="recipe-ingredients" rows="5" required></textarea>
+
+        <label for="recipe-steps">Steps</label>
+        <textarea id="recipe-steps" name="recipe-steps" rows="5" required></textarea>
+
+        <label for="recipe-note">Note</label>
+        <textarea id="recipe-note" name="recipe-note" rows="5" required></textarea>
+
+        <button type="submit">Add Recipe</button>
+    </form>
+</div>
+
+</body>
+</html>
+{% endblock %}
