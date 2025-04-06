@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Recipe</title>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,52 +18,58 @@
             text-align: center;
             background-color: #ff6f61;
             color: white;
-            padding: 20px 0;
+            padding: 30px 0; /* Increased padding for better spacing */
         }
 
         header h1 {
             margin: 0;
-            font-size: 2rem;
+            font-size: 2.5rem; /* Slightly larger for emphasis */
         }
 
         .form-container {
-            max-width: 500px;
-            margin: 20px auto;
-            padding: 20px;
+            max-width: 600px; /* Expanded width for better usability */
+            margin: 40px auto; /* Added more space around the form */
+            padding: 30px; /* Increased padding for a balanced interior layout */
             background-color: white;
             border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 15px; /* Slightly rounded corners for a softer look */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow effect */
         }
 
         .form-container label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px; /* Slightly larger spacing for readability */
             font-weight: bold;
         }
 
         .form-container input, .form-container textarea {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 12px; /* More padding for better input field appearance */
+            margin-bottom: 20px; /* Increased spacing between fields */
+            border: 1px solid #ccc; /* Softer border color for input fields */
+            border-radius: 8px; /* Rounded edges for modern design */
+            box-sizing: border-box;
+        }
+
+        .form-container textarea {
+            resize: none; /* Prevent resizing for better consistency */
         }
 
         .form-container button {
             display: block;
             width: 100%;
-            padding: 10px;
+            padding: 15px; /* Larger button for better interaction */
             background-color: #ff6f61;
             color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 1rem;
+            border-radius: 8px; /* Rounded corners matching the inputs */
+            font-size: 1.2rem; /* Slightly larger font for emphasis */
             cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth hover effect */
         }
 
         .form-container button:hover {
-            background-color: #e65a50;
+            background-color: #e65a50; /* Subtle color change on hover */
         }
     </style>
 </head>
@@ -70,6 +77,7 @@
 
 <header>
     <h1>Add a New Recipe</h1>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </header>
 
 <div class="form-container">

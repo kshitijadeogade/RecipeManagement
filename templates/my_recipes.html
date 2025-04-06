@@ -90,9 +90,9 @@
 </header>
 
 <nav>
-    <a href="#">Home</a>
-    <a href="#">Add Recipe</a>
-    <a href="#">Profile</a>
+    <a href="{{ url_for('index') }}">Home</a>
+    <a href="{{ url_for('add_recipe') }}">Add Recipe</a>
+    <a href="{{ url_for('login') }}">Logout</a>
 </nav>
 
 <div class="recipe-grid">

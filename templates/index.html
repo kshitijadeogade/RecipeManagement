@@ -1,0 +1,114 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasteTrail: Recipe Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .recipes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .recipe-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .recipe-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .recipe-card .recipe-info {
+            padding: 16px;
+            text-align: center;
+        }
+
+        .recipe-card .recipe-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>TasteTrail</h1>
+            </div>
+            {% if user.email %}
+            <nav>
+                <a href="{{ url_for('index') }}" class="index">Home</a>
+                <a href="{{ url_for('my_recipes') }}" class="my_recipes">My Recipes</a>
+                <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+            </nav>
+            {% else %}
+            <nav>
+                <a href="{{ url_for('index') }}" class="index">Home</a>
+                <a href="{{ url_for('login') }}" class="login">Login</a>
+                <a href="{{ url_for('signup') }}" class="signup">Signup</a>
+            </nav>
+            {% endif %}
+        </div>
+    </header>
+
+    Welcome {{user.name}}
+
+    <!-- Recipe Cards Section -->
+    <section class="recipes-container">
+        <div class="recipe-card">
+            <img src="https://www.vikhrolicucina.com/uploads/stories/1582355956_Rajmachawal.jpg" alt="Rajma Chawal">
+            <div class="recipe-info">
+                <h3 class="recipe-title">Rajma Chawal</h3>
+            </div>
+        </div>
+        <div class="recipe-card">
+            <img src="https://www.allrecipes.com/thmb/Vg2cRidr2zcYhWGvPD8M18xM_WY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/11973-spaghetti-carbonara-ii-DDMFS-4x3-6edea51e421e4457ac0c3269f3be5157.jpg" alt="Spaghetti Carbonara">
+            <div class="recipe-info">
+                <h3 class="recipe-title">Spaghetti Carbonara</h3>
+            </div>
+        </div>
+        <!-- Add more recipe cards as needed -->
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2025 TasteTrail. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+{% endblock %}

@@ -13,6 +13,16 @@ try:
 except Exception as e:
     print(e)
 
+def getUserByEmail(email, by_id=False):
+    users = db['users']
+    if by_id:
+        try:
+            return users.find_one({'_id': ObjectId(email)})
+        except Exception as e:
+            print("Error converting to ObjectId:", e)
+            return None
+    return users.find_one({'email': email})
+
 def createUser(email, password, name):
     users_collection = db['users']
     if users_collection.find_one({'email': email}):

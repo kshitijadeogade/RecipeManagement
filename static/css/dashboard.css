@@ -145,3 +145,14 @@ footer {
 .social-links a:hover {
     color: #ffe0b2;
 }
+
+.banner-container {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.banner-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
