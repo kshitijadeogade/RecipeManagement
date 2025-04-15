@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Recipe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -81,37 +83,93 @@
         .form-container .delete-button:hover {
             background-color: #c9302c; /* Darker shade for hover effect */
         }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #ff6f61;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 10px;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Edit Recipe</h1>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </header>
 
+<div>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('my_recipes') }}">My Recipes</a>
+        <a href="{{ url_for('logout') }}" class="logout" id="logout-link">Logout</a>
+    </nav>
+</div>
+
 <div class="form-container">
-    <form action="#" method="POST">
-        <label for="recipe-name">Recipe Name</label>
-        <input type="text" id="recipe-name" name="recipe-name" value="Butter Chicken" required>
+    <form method="POST">
+        <label for="name">Recipe Name</label>
+        <input type="text" name="name" id="name" value="{{ recipe.name }}" required>
 
-        <label for="recipe-image">Recipe Image</label>
-        <input type="url" id="recipe-image" name="recipe-image" value=" " required>
+        <label for="image">Image</label>
+        <input type="file" id="recipe-image" name="image" accept="image/*" required>
+        {% if recipe.image %}
+            <img src="{{ recipe.image }}" alt="Recipe Image" style="width:100%; margin-top: 20px; border-radius: 10px;">
+        {% endif %}
 
-        <label for="recipe-ingredients">Ingredients</label>
-        <textarea id="recipe-ingredients" name="recipe-ingredients" rows="5" required></textarea>
+        <label for="ingredients">Ingredients</label>
+        <textarea name="ingredients" id="ingredients" rows="5" required>{{ recipe.ingredients }}</textarea>
 
-        <label for="recipe-steps">Steps</label>
-        <textarea id="recipe-steps" name="recipe-steps" rows="5" required></textarea>
+        <label for="steps">Steps</label>
+        <textarea name="steps" id="steps" rows="5" required>{{ recipe.steps }}</textarea>
 
-        <label for="recipe-note">Note</label>
-        <textarea id="recipe-note" name="recipe-note" rows="5" required></textarea>
+        <label for="note">Notes</label>
+        <textarea name="note" id="note" rows="3">{{ recipe.note }}</textarea>
+
+        
 
         <button type="submit">Save Changes</button>
-        <button type="button" class="delete-button">Delete Recipe</button>
+    </form>
+
+    <form method="POST" action="{{ url_for('delete_recipe', id=recipe._id) }}" onsubmit="return confirmDelete();">
+        <button type="submit" class="delete-button">Delete Recipe</button>
     </form>
 </div>
 
+<script>
+    // Delete Confirmation
+    function confirmDelete() {
+      return confirm("Are you sure you want to permanently delete this recipe?");
+    }
+  
+    // Logout Confirmation (safe from null references)
+    document.addEventListener('DOMContentLoaded', function () {
+      const logoutLink = document.getElementById('logout-link');
+      
+      if (logoutLink) {
+        logoutLink.addEventListener('click', function (event) {
+          const confirmed = confirm('Are you sure you want to logout?');
+          if (!confirmed) {
+            event.preventDefault(); // Cancel the logout if user clicks "Cancel"
+          }
+        });
+      }
+    });
+  </script>
+  
 </body>
 </html>
 {% endblock %}

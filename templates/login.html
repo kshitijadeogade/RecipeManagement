@@ -11,7 +11,7 @@
 <body></body>
     <div class="container">
         <div class="form-container">
-            <button a href="index">&larr; Back to Home</button>
+            <a href="{{ url_for('index') }}" class="back-button">&larr; Back to Home</a>
             <h2 id="form-title">Welcome Back</h2>
             <h3 id="form-subtitle">Login to continue</h3>
             
@@ -25,6 +25,8 @@
                 
                 <button type="submit" id="form-btn">Login</button>
             </form>
+
+            <p>{{msg}}</p>
             
             <p class="switch-form">
                 Don't have an account? <a href="signup" id="signup">Sign up</a>

@@ -39,16 +39,24 @@ def loginUser(email, password):
     else:
         return {'code': "INVALID_CREDENTIALS"}
     
-def addRecipe(name, image, ingredients, steps, note, userId="1"):
+def addRecipe(name, image, ingredients, steps, note, userId):
     recipes_collection = db['recipes']
-    recipes_collection.insert_one({'name': name, 'image': image, 'ingredients':ingredients, 'steps':steps, 'note':note, 'userId': userId})
+    recipes_collection.insert_one({'name': name, 'image': image, 'ingredients':ingredients, 'steps':steps, 'note':note, 'userId': ObjectId(userId)})
     return {'code': "RECIPE_ADDED"}
 
 def getMyRecipes(userId):
     recipes_collection = db['recipes']
-    recipes = list(recipes_collection.find({'userId': userId}))
+    recipes = list(recipes_collection.find({'userId': ObjectId(userId)}))
     if recipes:
-        return {'code': "RECIPE_FOUND", 'recipes': recipes}
+        return {'code': "RECIPES_FOUND", 'recipes': recipes}
+    else:
+        return {'code': "NO_RECIPE_FOUND"}
+    
+def getAllRecipes():
+    recipes_collection = db['recipes']
+    recipes = list(recipes_collection.find())
+    if recipes:
+        return {'code': "RECIPES_FOUND", 'recipes': recipes}
     else:
         return {'code': "NO_RECIPE_FOUND"}
 
@@ -61,11 +69,7 @@ def editRecipe(id, name, image, ingredients, steps, note, userId="1"):
 
 def deleteRecipe(id):
     recipes_collection = db['recipes']
-    delete = recipes_collection.delete_one({'_id': ObjectId(id)})
-    return {'code': "RECIPE_DELETED"}
-
-#print(deleteRecipe("67dabeb83948e9820e62dd75"))
-#print(editRecipe("67dae766c4d788f599650d70", "Palak Paneer Lahsuni",'pic2',["Palak", "Paneer"], ["Boil the palak","Fry the paneer", "Grind the palak","Give the final tadka","Put paneer pieces in tadka"],["Dont deep fry paneer"]))
-#print(editRecipe('67dabeb83948e9820e62dd75','pic2',"Palak Paneer","Palak", ["Boil the palak","Fry the paneer", "Grind the palak","Give the final tadka","Put paneer pieces in tadka"],["Dont deep fry paneer"]))
-
-#print(createUser('deogadekshitija@gmail.com', 'password', 'name'))
+    result = recipes_collection.delete_one({'_id': ObjectId(id)})
+    if result.deleted_count > 0:
+        return {'code': 'RECIPE_DELETED'}
+    return {'code': 'RECIPE_NOT_FOUND'}

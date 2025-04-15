@@ -1,0 +1,128 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            text-align: center;
+            background-color: #ff6f61;
+            color: white;
+            padding: 30px 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+        .recipe-container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .recipe-container h2, .recipe-container h3 {
+            color: #ff6f61;
+        }
+        .recipe-container p {
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        .reference {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .image-wrapper {
+        text-align: center;
+        margin: 20px 0;
+        }
+
+        .image-wrapper img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #ff6f61;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 10px;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    
+        <header>
+            <h1>Recipe Description</h1>
+        </header>
+        <div>
+            <nav>
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('my_recipes') }}">My Recipes</a>
+                <a href="{{ url_for('logout') }}" class="logout" id="logout-link">Logout</a>
+            </nav>
+        </div>
+        
+        <div class="recipe-container" id="recipe-{{ recipe._id }}">
+            <h2>Recipe Name: {{ recipe.name }}</h2>
+        
+            <div class="image-wrapper">
+                <img src="{{ recipe.image }}" alt="Recipe Image">
+            </div>
+        
+            <h3>Ingredients:</h3>
+            <p>{{ recipe.ingredients }}</p>
+        
+            <h3>Steps:</h3>
+            <p>{{ recipe.steps }}</p>
+        
+            <h3>Note:</h3>
+            <p>{{ recipe.note }}</p>
+        </div>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const logoutLink = document.getElementById('logout-link');
+    
+            logoutLink.addEventListener('click', function (event) {
+                const confirmed = confirm('Are you sure you want to logout?');
+                if (!confirmed) {
+                    event.preventDefault(); // Cancel the logout if user clicks "Cancel"
+                }
+            });
+        });
+        </script>
+
+        </body>
+
+</html>
+{% endblock %}

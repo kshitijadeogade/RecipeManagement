@@ -71,6 +71,26 @@
         .form-container button:hover {
             background-color: #e65a50; /* Subtle color change on hover */
         }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #ff6f61;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 10px;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -79,27 +99,48 @@
     <h1>Add a New Recipe</h1>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </header>
+<div>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('my_recipes') }}">My Recipes</a>
+        <a href="{{ url_for('logout') }}" class="logout" id="logout-link">Logout</a>
+    </nav>
+</div>
 
 <div class="form-container">
-    <form action="#" method="POST">
+    <form action="/add_recipe" method="POST" enctype="multipart/form-data">
         <label for="recipe-name">Recipe Name</label>
-        <input type="text" id="recipe-name" name="recipe-name" required>
+        <input type="text" id="recipe-name" name="name" required>
 
         <label for="recipe-image">Recipe Image</label>
-        <input type="url" id="recipe-image" name="recipe-image" required>
+        <input type="file" id="recipe-image" name="image" accept="image/*" required>
 
         <label for="recipe-ingredients">Ingredients</label>
-        <textarea id="recipe-ingredients" name="recipe-ingredients" rows="5" required></textarea>
+        <textarea id="recipe-ingredients" name="ingredients" rows="5" required></textarea>
 
         <label for="recipe-steps">Steps</label>
-        <textarea id="recipe-steps" name="recipe-steps" rows="5" required></textarea>
+        <textarea id="recipe-steps" name="steps" rows="5" required></textarea>
 
         <label for="recipe-note">Note</label>
-        <textarea id="recipe-note" name="recipe-note" rows="5" required></textarea>
+        <textarea id="recipe-note" name="note" rows="5" required></textarea>
 
-        <button type="submit">Add Recipe</button>
+            <button type="submit">Add Recipe</button>
+        
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+            const logoutLink = document.getElementById('logout-link');
+    
+            logoutLink.addEventListener('click', function (event) {
+                const confirmed = confirm('Are you sure you want to logout?');
+                if (!confirmed) {
+                    event.preventDefault(); // Cancel the logout if user clicks "Cancel"
+                }
+            });
+        });
+</script>
 
 </body>
 </html>

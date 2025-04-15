@@ -15,6 +15,59 @@
             padding: 0;
         }
 
+        header {
+            background-color: #ff7043;
+            padding: 20px 40px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            margin: 0;
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        nav a {
+            background-color: white;
+            color: #ff7043;
+            padding: 8px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #ff5722;
+            color: white;
+        }
+
+        .welcome-user {
+            margin-left: 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 10px;
+        }
+
         .recipes-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -56,6 +109,25 @@
             color: #333;
             margin: 0;
         }
+
+        footer {
+            background-color: #514845;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -65,39 +137,35 @@
             <div class="logo">
                 <h1>TasteTrail</h1>
             </div>
-            {% if user.email %}
-            <nav>
-                <a href="{{ url_for('index') }}" class="index">Home</a>
-                <a href="{{ url_for('my_recipes') }}" class="my_recipes">My Recipes</a>
-                <a href="{{ url_for('logout') }}" class="logout">Logout</a>
-            </nav>
-            {% else %}
-            <nav>
-                <a href="{{ url_for('index') }}" class="index">Home</a>
-                <a href="{{ url_for('login') }}" class="login">Login</a>
-                <a href="{{ url_for('signup') }}" class="signup">Signup</a>
-            </nav>
-            {% endif %}
+            <div style="display: flex; align-items: center;">
+                <nav>
+                    <a href="{{ url_for('index') }}" class="index">Home</a>
+                    {% if user.email %}
+                        <a href="{{ url_for('my_recipes') }}" class="my_recipes">My Recipes</a>
+                        <a href="{{ url_for('logout') }}" class="logout" id="logout-link">Logout</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="login">Login</a>
+                        <a href="{{ url_for('signup') }}" class="signup">Signup</a>
+                    {% endif %}
+                </nav>
+                {% if user.email %}
+                <p class="welcome-user">Welcome, {{ user.name }}!</p>
+                {% endif %}
+            </div>
         </div>
     </header>
-
-    Welcome {{user.name}}
-
     <!-- Recipe Cards Section -->
     <section class="recipes-container">
-        <div class="recipe-card">
-            <img src="https://www.vikhrolicucina.com/uploads/stories/1582355956_Rajmachawal.jpg" alt="Rajma Chawal">
-            <div class="recipe-info">
-                <h3 class="recipe-title">Rajma Chawal</h3>
+        {% for recipe in recipes %}
+        <a href="/view_recipe/{{ recipe._id }}" class="view_recipe">
+            <div class="recipe-card">
+                <img src="{{recipe.image}}" alt="Recipe Image">
+                <div class="recipe-info">
+                    <h3 class="recipe-title">{{recipe.name}}</h3>
+                </div>
             </div>
-        </div>
-        <div class="recipe-card">
-            <img src="https://www.allrecipes.com/thmb/Vg2cRidr2zcYhWGvPD8M18xM_WY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/11973-spaghetti-carbonara-ii-DDMFS-4x3-6edea51e421e4457ac0c3269f3be5157.jpg" alt="Spaghetti Carbonara">
-            <div class="recipe-info">
-                <h3 class="recipe-title">Spaghetti Carbonara</h3>
-            </div>
-        </div>
-        <!-- Add more recipe cards as needed -->
+        </a>
+        {% endfor %}
     </section>
 
     <!-- Footer -->
@@ -109,6 +177,20 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const logoutLink = document.getElementById('logout-link');
+    
+            logoutLink.addEventListener('click', function (event) {
+                const confirmed = confirm('Are you sure you want to logout?');
+                if (!confirmed) {
+                    event.preventDefault(); // Cancel the logout if user clicks "Cancel"
+                }
+            });
+        });
+    </script>
+    
 </body>
 </html>
 {% endblock %}
