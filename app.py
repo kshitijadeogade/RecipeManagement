@@ -35,12 +35,19 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
+    search_query = request.args.get('search', '').strip()
+
     res = getAllRecipes()
-    if(res["code"] == "RECIPES_FOUND"):
+    recipes = []
+
+    if res["code"] == "RECIPES_FOUND":
         recipes = res["recipes"]
-    else:
-        recipes = []
-    return render_template('index.html', user=current_user, recipes=recipes)
+        if search_query:
+            recipes = [recipe for recipe in recipes if search_query.lower() in recipe['name'].lower()]
+
+    return render_template('index.html', user=current_user, recipes=recipes, search_query=search_query)
+
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Recipe</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/logo.bmp') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -115,7 +116,7 @@
     <nav>
         <a href="{{ url_for('index') }}">Home</a>
         <a href="{{ url_for('my_recipes') }}">My Recipes</a>
-        <a href="{{ url_for('logout') }}" class="logout" id="logout-link">Logout</a>
+        <a href="{{ url_for('login') }}">Logout</a>
     </nav>
 </div>
 
@@ -125,7 +126,6 @@
         <input type="text" name="name" id="name" value="{{ recipe.name }}" required>
 
         <label for="image">Image</label>
-        <input type="file" id="recipe-image" name="image" accept="image/*" required>
         {% if recipe.image %}
             <img src="{{ recipe.image }}" alt="Recipe Image" style="width:100%; margin-top: 20px; border-radius: 10px;">
         {% endif %}
@@ -150,26 +150,26 @@
 </div>
 
 <script>
-    // Delete Confirmation
-    function confirmDelete() {
-      return confirm("Are you sure you want to permanently delete this recipe?");
+  // Delete Confirmation
+  function confirmDelete() {
+    return confirm("Are you sure you want to permanently delete this recipe?");
+  }
+
+  // Logout Confirmation (safe from null references)
+  document.addEventListener('DOMContentLoaded', function () {
+    const logoutLink = document.getElementById('logout-link');
+    
+    if (logoutLink) {
+      logoutLink.addEventListener('click', function (event) {
+        const confirmed = confirm('Are you sure you want to logout?');
+        if (!confirmed) {
+          event.preventDefault(); // Cancel the logout if user clicks "Cancel"
+        }
+      });
     }
-  
-    // Logout Confirmation (safe from null references)
-    document.addEventListener('DOMContentLoaded', function () {
-      const logoutLink = document.getElementById('logout-link');
-      
-      if (logoutLink) {
-        logoutLink.addEventListener('click', function (event) {
-          const confirmed = confirm('Are you sure you want to logout?');
-          if (!confirmed) {
-            event.preventDefault(); // Cancel the logout if user clicks "Cancel"
-          }
-        });
-      }
-    });
-  </script>
-  
+  });
+</script>
+
 </body>
 </html>
 {% endblock %}

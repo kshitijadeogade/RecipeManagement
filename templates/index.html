@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TasteTrail: Recipe Management System</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/logo.b') }}">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
     <style>
@@ -154,20 +155,41 @@
             </div>
         </div>
     </header>
+    <div style="text-align: center; margin-top: 30px;">
+        <form method="GET" action="{{ url_for('index') }}">
+            <input 
+                type="text" 
+                name="search" 
+                placeholder="Search recipes by name..." 
+                value="{{ request.args.get('search', '') }}" 
+                style="padding: 10px; width: 250px; border-radius: 5px; border: 1px solid #ccc;">
+            <button 
+                type="submit" 
+                style="padding: 10px 20px; background-color: #ff7043; color: white; border: none; border-radius: 5px; font-weight: bold;">
+                Search
+            </button>
+        </form>
+    </div>
     <!-- Recipe Cards Section -->
     <section class="recipes-container">
-        {% for recipe in recipes %}
-        <a href="/view_recipe/{{ recipe._id }}" class="view_recipe">
-            <div class="recipe-card">
-                <img src="{{recipe.image}}" alt="Recipe Image">
-                <div class="recipe-info">
-                    <h3 class="recipe-title">{{recipe.name}}</h3>
+        {% if recipes %}
+            {% for recipe in recipes %}
+            <a href="/view_recipe/{{ recipe._id }}" class="view_recipe">
+                <div class="recipe-card">
+                    <img src="{{ recipe.image }}" alt="Recipe Image">
+                    <div class="recipe-info">
+                        <h3 class="recipe-title">{{ recipe.name }}</h3>
+                    </div>
                 </div>
-            </div>
-        </a>
-        {% endfor %}
+            </a>
+            {% endfor %}
+        {% else %}
+            <p style="grid-column: 1 / -1; text-align: center; font-size: 1.2rem; color: #555;">
+                No recipes found{% if search_query %} for "{{ search_query }}"{% endif %}.
+            </p>
+        {% endif %}
     </section>
-
+    
     <!-- Footer -->
     <footer>
         <div class="footer-container">
